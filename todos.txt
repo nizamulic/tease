@@ -1,0 +1,10 @@
+1. get new email -- done
+2. email with checking code--done 
+3. phone number get
+4. phone number code
+5. install extension
+6. login
+7. create new tab 1 minutes
+8. if tab crosses 3 than start from first page
+9. pyautogui enter button 1 minutes
+10. get balance and save it to firebase
