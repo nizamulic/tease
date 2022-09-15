@@ -5,6 +5,17 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import time
 from threading import Timer
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import db
+
+# Fetch the service account key JSON file contents
+cred = credentials.Certificate('web-tests-60e15-firebase-adminsdk-hdgfk-58b66a5e39.json')
+# Initialize the app with a service account, granting admin privileges
+firebase_admin.initialize_app(cred, {
+    'databaseURL': "https://web-tests-60e15-default-rtdb.firebaseio.com"
+})
+
 
 chop = webdriver.ChromeOptions()
 chop.add_extension("extension_1_2_1_0.crx")
@@ -93,6 +104,17 @@ email = str(test.address)
 password = username + "123"
 with open('addresses.txt', 'a', encoding="utf-8") as f:
       f.write("\n"+email)
+
+# account details on firebase
+ref = db.reference("/accounts")
+ref.push().set(
+	{
+		"email": email,
+        "proxy": proxy
+	}
+)
+print(ref.get())
+
 # sign up
 driver.get("https://teaserfast.ru/registration/")
 time.sleep(5)

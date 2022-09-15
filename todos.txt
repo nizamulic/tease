@@ -8,3 +8,6 @@
 8. if tab crosses 3 than start from first page
 9. pyautogui enter button 1 minutes
 10. get balance and save it to firebase
+
+
+save to firebase  login details with proxy ip
