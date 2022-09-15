@@ -105,7 +105,7 @@ chop = webdriver.ChromeOptions()
 chop.add_extension("extension_1_2_1_0.crx")
 proxy = '199.16.55.252:3551'   
 chop.add_argument('--proxy-server=socks5://' + proxy)
-chop.add_argument("--user-data-dir=C:/Users/Administrator/Documents/teaserfast/profiles"+ username)
+chop.add_argument("--user-data-dir=C:/Users/Administrator/Documents/teaserfast/profiles/"+ username)
 
 driver = webdriver.Chrome('chromedriver.exe', chrome_options=chop)
 
