@@ -1,8 +1,10 @@
+# registration
 from mailtm import Email
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import time
+from threading import Timer
 
 chop = webdriver.ChromeOptions()
 chop.add_extension("extension_1_2_1_0.crx")
@@ -10,6 +12,55 @@ proxy = '199.16.55.252:3551'
 chop.add_argument('--proxy-server=socks5://' + proxy)
 
 driver = webdriver.Chrome('chromedriver.exe', chrome_options=chop)
+
+def setInterval(timer, task):
+    isStop = task()
+    if not isStop:
+        Timer(timer, setInterval, [timer, task]).start()
+
+
+def random_browsing():
+    print("do something")
+    # driver.execute_script("window.open('http://google.com', 'firsttab');")
+    try:
+        driver.switch_to.window(driver.window_handles[0])
+        print("here 0")
+        driver.get('http://google.com')
+        print("here 1")
+        time.sleep(3)
+
+        driver.execute_script("window.open('https://www.geeksforgeeks.org/');")
+        print("here 2")
+        time.sleep(3)
+
+        # # It is switching to second tab now
+        driver.switch_to.window(driver.window_handles[1])
+        print("here 3")
+
+        # In the second tab, it opens geeksforgeeks
+        # driver.get('https://www.geeksforgeeks.org/')
+
+        driver.execute_script("window.open('https://www.facebook.com/');")
+        print("here 4")
+        
+        # It is switching to second tab now
+        driver.switch_to.window(driver.window_handles[2])
+        time.sleep(3)
+        # In the second tab, it opens geeksforgeeks
+        # driver.get('https://www.facebook.com/')
+
+        # driver.switch_to.window("secondtab")
+        # driver.switch_to.window(driver.window_handles[2])
+        driver.close()
+        driver.switch_to.window(driver.window_handles[1])
+        driver.close()
+        # driver.switch_to.window("firsttab")
+        # driver.close()
+        # driver.switch_to.window("thirdtab")
+    except:
+        print("error")
+
+    return False # return True if you want to stop
 
 def listener(message):
     print("\nSubject: " + message['subject'])
@@ -21,6 +72,8 @@ def listener(message):
             if line.startswith('https://teaserfast.ru/registration/?verification='):
                 print(line)
                 driver.get(str(line))
+                # random browsing
+                setInterval(30, random_browsing)
     print("Content: " + message['text'] if message['text'] else message['html'])
 
 # Get Domains
@@ -69,3 +122,6 @@ if(captcha == "Y"):
     # submit button
     driver.find_element(By.XPATH, "/html/body/div[1]/div/div/div[2]/div[2]/a").click()
 
+
+
+#  pyautogui enter
