@@ -11,3 +11,7 @@
 
 
 save to firebase  login details with proxy ip
+
+keep entering and alt + tab each minute
+
+add a user-data-dir

@@ -17,12 +17,7 @@ firebase_admin.initialize_app(cred, {
 })
 
 
-chop = webdriver.ChromeOptions()
-chop.add_extension("extension_1_2_1_0.crx")
-proxy = '199.16.55.252:3551'   
-chop.add_argument('--proxy-server=socks5://' + proxy)
 
-driver = webdriver.Chrome('chromedriver.exe', chrome_options=chop)
 
 def setInterval(timer, task):
     isStop = task()
@@ -104,6 +99,15 @@ email = str(test.address)
 password = username + "123"
 with open('addresses.txt', 'a', encoding="utf-8") as f:
       f.write("\n"+email)
+
+# driver setup
+chop = webdriver.ChromeOptions()
+chop.add_extension("extension_1_2_1_0.crx")
+proxy = '199.16.55.252:3551'   
+chop.add_argument('--proxy-server=socks5://' + proxy)
+chop.add_argument("--user-data-dir=C:/Users/Administrator/Documents/teaserfast/profiles"+ username)
+
+driver = webdriver.Chrome('chromedriver.exe', chrome_options=chop)
 
 # account details on firebase
 ref = db.reference("/accounts")

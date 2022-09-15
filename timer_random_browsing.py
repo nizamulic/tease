@@ -8,6 +8,8 @@ import time
 chop = webdriver.ChromeOptions()
 chop.add_extension("extension_1_2_1_0.crx")
 proxy = '199.16.55.252:3561'
+chop.add_argument("--user-data-dir=C:/Users/melodic/Documents/teaserfast/here")
+
 # chop.add_argument('--proxy-server=socks5://' + proxy)
 driver = webdriver.Chrome('chromedriver.exe', chrome_options=chop)
 

@@ -1,3 +1,4 @@
 MailTm
 selenium
 firebase_admin
+pyautogui
